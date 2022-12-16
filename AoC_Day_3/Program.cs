@@ -69,4 +69,5 @@ static int FindScore(char c)
     return 0;
 }
 
+// Print the result
 Console.WriteLine(score);
