@@ -39,7 +39,7 @@ static void ShowStack(Stack<char> stc)
 }
 
 
-
+List<char> inter;
 
 for (int i = 10; i < lines.Count(); i++)
 {
@@ -48,14 +48,25 @@ for (int i = 10; i < lines.Count(); i++)
     int from = Int32.Parse(parts[3]);
     int to = Int32.Parse(parts[5]);
 
+    inter = new List<char>();
     for (int j = 0; j < count; j++)
     {
         char pop = stacks[from].Pop();
-        stacks[to].Push(pop);
+
+        inter.Add(pop);
 
     }
 
-     
+    for (int j = count - 1; j >= 0; j--)
+    {
+        stacks[to].Push(inter[j]);
+
+
+
+    }
+ 
+
+
 }
 Console.WriteLine();
 
