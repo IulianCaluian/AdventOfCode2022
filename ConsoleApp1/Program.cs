@@ -12,11 +12,11 @@ SortedDictionary<int, SortedSet<int>> viz = new SortedDictionary<int, SortedSet<
 int moves;
 
 
-P[] rope= new P[10];
+P[] rope = new P[10];
 
 viz.Add(0, new SortedSet<int> { 0 });
 
-foreach(var line in lines)
+foreach (var line in lines)
 {
     string[] parts = line.Split(' ');
 
@@ -33,10 +33,9 @@ foreach(var line in lines)
         for (int j = 1; j <= 9; j++)
         {
             rope[j] = CalculateNewTail(rope[j - 1], rope[j]);
-
-            Console.WriteLine($"{j}: {rope[j].X},{rope[j].Y}");
+      //      Console.WriteLine($"{j}: {rope[j].X},{rope[j].Y}");
         }
-        Console.WriteLine();
+     //   Console.WriteLine();
 
         int tx = rope[9].X;
         int ty = rope[9].Y;
@@ -67,14 +66,20 @@ foreach (var row in viz)
 Console.WriteLine(rez);
 
 
-P CalculateNewTail (P H, P oldT)
+P CalculateNewTail(P H, P oldT)
 {
     P newT = new P();
     newT.X = oldT.X;
     newT.Y = oldT.Y;
 
     // Move tail:
-    if (Math.Abs(H.X - oldT.X) == 2)
+    // Move tail:
+    if (Math.Abs(H.Y - oldT.Y) == 2 && Math.Abs(H.X - oldT.X) == 2)
+    {
+        newT.X = (H.X + oldT.X) / 2;
+        newT.Y = (H.Y + oldT.Y) / 2;
+    }
+    else if (Math.Abs(H.X - oldT.X) == 2)
     {
         newT.X = (H.X + oldT.X) / 2;
         newT.Y = H.Y;
@@ -82,7 +87,7 @@ P CalculateNewTail (P H, P oldT)
     else if (Math.Abs(H.Y - oldT.Y) == 2)
     {
         newT.X = H.X;
-        newT.Y= (H.Y + oldT.Y) / 2;
+        newT.Y = (H.Y + oldT.Y) / 2;
     }
 
     return newT;
@@ -93,7 +98,7 @@ public struct P
     public int X;
     public int Y;
 
-   public P() 
+    public P()
     {
         X = Y = 0;
     }
